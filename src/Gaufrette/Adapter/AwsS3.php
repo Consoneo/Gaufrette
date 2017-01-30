@@ -178,7 +178,7 @@ class AwsS3 implements Adapter,
     }
 
     /**
-     * {@inheritdoc}
+     * @return String the Content-Type of the specified key
      */
     public function contentType($key)
     {
