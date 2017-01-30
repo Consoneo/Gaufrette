@@ -190,6 +190,24 @@ class AmazonS3 implements Adapter,
     }
 
     /**
+     * @param $key
+     * @return bool
+     * @throws \RuntimeException
+     */
+    public function contentType($key)
+    {
+        $this->ensureBucketExists();
+
+        $response = $this->service->get_object_metadata(
+            $this->bucket,
+            $this->computePath($key),
+            $this->getMetadata($key)
+        );
+
+        return isset($response['Headers']['Content-Type']) ? $response['Headers']['Content-Type'] : false;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function keys()

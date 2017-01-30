@@ -180,6 +180,20 @@ class AwsS3 implements Adapter,
     /**
      * {@inheritdoc}
      */
+    public function contentType($key)
+    {
+        try {
+            $result = $this->service->headObject($this->getOptions($key));
+
+            return strtotime($result['Content-Type']);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function size($key)
     {
         try {
