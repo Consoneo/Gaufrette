@@ -184,8 +184,7 @@ class AwsS3 implements Adapter,
     {
         try {
             $result = $this->service->headObject($this->getOptions($key));
-
-            return strtotime($result['Content-Type']);
+            return $result['ContentType'];
         } catch (\Exception $e) {
             return false;
         }
